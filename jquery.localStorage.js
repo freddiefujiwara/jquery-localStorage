@@ -11,10 +11,11 @@ jQuery.localStorage = {
   set : function(key,data,expire) {
       if(!window || !window.localStorage)
         return;
-      window.localStorage.setItem(key,{
-        expire:((new Date()).getTime() + expire),
-        data:data
-      }.toSource());
+        
+      var storeData = new Object();
+      storeData.expire = (new Date()).getTime() + expire;
+      storeData.data   = data;
+      window.localStorage.setItem(key,storeData.toSource());
   },
   get : function(key){
       var cache = null;
