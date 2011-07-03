@@ -16,14 +16,14 @@ jQuery.localStorage = {
         'data':data
       }.toSource());
   },
-  get : function(key,next){
+  get : function(key){
       var cache = null;
       if(window.localStorage && window.localStorage.getItem(key)){
           cache = eval(window.localStorage.getItem(key));
       }
       
       if(null == cache || null != cache && ((new Date()).getTime() > cache.expire)){
-          return next();
+          return 	null;
       }
       return cache.data;
   }
