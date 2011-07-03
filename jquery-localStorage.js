@@ -1,30 +1,58 @@
+// jQuery Plugin localStorage
+// version 0.1 Jul 3th 2011
+// by Freddie Fujiwara
+
 (function($) {
-    //このPluginの名前
-    var name_space = 'basePlugin';
-    $.fn[name_space] = function(options) {
-        //いったん退避
-        var elements = this;
 
-        //設定情報の構築
-        var settings = $.extend({
-            //optionの初期値を設定
-            'param' : 'value'
-        }, options);
+    $.localStorage = function(element, options) {
 
-        //内部用method
-        var inner_method = function () {
-            //内部の共通処理の記述
+        var defaults = {};
+
+        var plugin = this;
+
+        plugin.settings = {};
+
+        var $element = $(element),
+             element = element;
+
+        plugin.init = function() {
+            plugin.settings = $.extend({}, defaults, options);
+            // code goes here
         };
 
-        //要素を一個ずつ処理
-        elements.each(function() {
-            $(this)
-                //イベント等の設定
-                .keyup(inner_method)
-            ;
+        plugin.set = function(key,data,expire) {
+            if(!window || !window.localStorage)
+              return;
+            window.localStorage.setItem(key,{
+	      'expire':((new Date()).getTime() + expire)
+	      'data':obj
+            }.toSource());
+        };
+        plugin.get = function(key,next){
+            var cache = null;
+            if(window.localStorage && window.localStorage.getItem(key)){
+                cache = eval(window.localStorage.getItem(key));
+            }
+            
+            if(null == cache || null != cache && ((new Date()).getTime() > cache.expire)){
+                return next();
+            }
+            return cache.data;
+        };
+
+        plugin.init();
+
+    }
+
+    $.fn.localStorage = function(options) {
+
+        return this.each(function() {
+            if (undefined == $(this).data('localStorage')) {
+                var plugin = new $.localStorage(this, options);
+                $(this).data('localStorage', plugin);
+            }
         });
 
-        //method chain
-        return this;
-    };
+    }
+
 })(jQuery);
