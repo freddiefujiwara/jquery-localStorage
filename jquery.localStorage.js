@@ -20,6 +20,7 @@ jQuery.localStorage = {
   get : function(key){
       var cache = null;
       if(window.localStorage && window.localStorage.getItem(key)){
+          console.debug(key);
           cache = eval(window.localStorage.getItem(key));
       }
       
