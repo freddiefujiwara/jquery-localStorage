@@ -12,7 +12,7 @@ jQuery.localStorage = {
       if(!window || !window.localStorage)
         return;
       window.localStorage.setItem(key,{
-        expire:(new Date()).getTime() + expire,
+        expire:60000,//(new Date()).getTime() + expire,
         data:data
       }.toSource());
   },
