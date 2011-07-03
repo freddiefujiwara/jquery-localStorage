@@ -17,7 +17,7 @@ jQuery.localStorage = {
       var storeData = new Object();
       storeData.expire = (new Date()).getTime() + expire;
       storeData.data   = data;
-      window.localStorage.setItem(key,storeData.toJSON());
+      window.localStorage.setItem(key,JSON.stringify(storeData));
   },
   get : function(key){
       var cache = null;
