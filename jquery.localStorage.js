@@ -1,9 +1,7 @@
-/*jslint browser: true */ /*global jQuery: true */
-
 /**
  * jQuery Local Storage plugin
  *
- * Copyright (c) 2011 Freddie Fujiwara (stilbuero.de)
+ * Copyright (c) 2011 Freddie Fujiwara (http://www.facebook.com/freddiefujiwara)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html

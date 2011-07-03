@@ -1,0 +1,4 @@
+Usage:
+>>> $.localStorage.set('a',{a:'b',b:'c'},5*60*1000)
+>>> $.localStorage.get('a')
+Object { a="b", b="c"}
